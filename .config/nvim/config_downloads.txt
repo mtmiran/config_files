@@ -1,0 +1,15 @@
+# Spell check pt_br
+
+cd /tmp/
+wget https://extensions.libreoffice.org/assets/downloads/z/veroptbrv320aoc.oxt
+unzip *.oxt
+nvim
+:mkspell pt pt_BR
+não se preocupe com os erros , aperte enter para continuar
+:q
+mkdir ~/.config/nvim/spell/
+cp pt.utf-8.spl ~/.config/nvim/spell/
+
+init.vim 
+set spell spelllang=pt	" enable spellcheck
+"set nospell		" desable spellcheck
