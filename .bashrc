@@ -29,15 +29,12 @@ function prompt {
   local       WHITE="\[\033[1;37m\]"
   local  LIGHT_GRAY="\[\033[0;37m\]"
 
-  PS1="${CYAN}\u@\h: ${YELLOW}\W ${RED}$(parse_git_branch) ${NO_COLOR}\n\$ "
+  PS1="${CYAN}\u@\h: ${YELLOW}\W ${RED}\$(parse_git_branch) ${NO_COLOR}\n\$ "
 }
 prompt
 
 ### EXPORT ANT VARIABLES ###
 
-#p="\e[0m\]\e[0;36m\]\u@\h:\e[0;33m\]\W\[\e[31m\]\$(parse_git_branch)\n\e[0m\]\$ "
-
-#export PS1=$p
 export EDITOR="nvim"
 export BROWSER="firefox"
 export TERMINAL="xterm"
