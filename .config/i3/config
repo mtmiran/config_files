@@ -76,8 +76,6 @@ bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+h move up
 bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
@@ -236,9 +234,6 @@ bindsym $mod+a exec "brave-browser --incognito"
 ## monitor ##
 
 # monitor setup
-workspace 1 output HDMI-1
-workspace 2 output eDP-1
-
 exec_always xrandr --output HDMI-1 --auto --left-of eDP-1
 
 
@@ -253,10 +248,10 @@ bindsym --release $mod+Shift+s exec xfce4-screenshooter -rc
 ## autostart programms ##
 
 # wallpaper
-exec_always feh --bg-fill /home/$USER/Imagens/wallpaper/nuvem.jpg
+exec_always feh --bg-fill /home/mateus/Imagens/wallpaper/nuvem.jpg
 
 # display layout
-# exec_always /home/$USER/.screenlayout/perfil1.sh
+# exec_always /home/mateus/.screenlayout/perfil1.sh
 
 # clipman
 exec --no-startup-id xfce4-clipman &
