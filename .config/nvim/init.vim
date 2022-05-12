@@ -7,30 +7,31 @@
 "#
 "#########################
 
-" ## code behavior ##
+" ## GENERAL ##
 set title		" Set title of document
 set mouse=a		" enable mouse
 syntax on		" enable syntax
-set ruler		" Show row and column ruler information
-set signcolumn=yes	" Add a column on the left, useful for linting
 set scrolloff=8		" Minimum number of lines to keep above and below the cursor
 set number		" Show line numbers
 set relativenumber	" Show line relative numbers
 set linebreak		" Break lines at word (requires Wrap lines)
-set textwidth=100	" Line wrap (number of cols)
+set textwidth=79	" Line wrap (number of cols)
 set showmatch		" Highlight matching brace {} [] ()
 set list lcs=trail:·,tab:»·
+
 " ## search ##
 set hlsearch		" Highlight all search results
 set smartcase		" Enable smart-case search
 set ignorecase		" Always case-insensitive
 set incsearch		" Searches for strings incrementally
+
 " ## indent ##
 set autoindent		" Auto-indent new lines
 set shiftwidth=4	" Number of auto-indent spaces
 set smartindent		" Enable smart-indent
 set smarttab		" Enable smart-tabs
 set softtabstop=4	" Number of spaces per Tab
+
 " ## editor behavior ##
 set undolevels=1000	" Number of undo levels
 set backspace=indent,eol,start	" Backspace behaviour
@@ -53,11 +54,6 @@ filetype indent on	" Load the indent file for the file type, if any
 call plug#begin()
 Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
 Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
-Plug 'https://github.com/rafi/awesome-vim-colorschemes' " Retro Scheme
-
-" Markdown
-" Plug 'terroo/vim-auto-markdown'
-" Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
 
 " NerdTree
 Plug 'preservim/nerdtree'
@@ -68,39 +64,30 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-" Telescope
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
-
 " Auto Completion
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-jedi'
+
+" Formater
+Plug 'Chiel92/vim-autoformat'
 
 " Themes
-Plug 'sainnhe/everforest'
-Plug 'sainnhe/gruvbox-material'
-Plug 'EdenEast/nightfox.nvim'
+Plug 'rafi/awesome-vim-colorschemes' " Retro Scheme
+Plug 'rafamadriz/themes.nvim'
 
 call plug#end()
 
 
-""""" PLUGIN CONFIGURATION
-" COC config - https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
-let g:coc_global_extensions = [
-  \ 'coc-snippets',
-  \ 'coc-pairs',
-  \ 'coc-eslint',
-  \ 'coc-prettier',
-  \ 'coc-pyright',
-  \ ]
+" PLUGIN CONFIGURATION
 
-" Tagbar map to F8
-nmap <F8> :TagbarToggle<CR>
-
+"### Deoplete ###
+let g:deoplete#enable_at_startup = 1
+" Close the documentation window when completion is done
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " #### THEMES ####
-:colorscheme snow
+colorscheme snow
+" colorscheme neon
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -112,20 +99,34 @@ autocmd BufWritePre * :%s/\s\+$//e
 " Remove ^M at the end of the files save in windows
 map  :%s/\r//g
 
-
 " #### SpellChcek ####
 "set spell spelllang=pt	" Enable
 "set spelllang=en
 set nospell		" Desable
 
-
 " #### KEY MAPS ####
-" ## ctrl + s for save ##
-map <C-s> :w<CR>
+
+" vim-autoformat
+noremap <F3> :Autoformat<CR>
+
+" Tagbar map to F8
+nmap <F8> :TagbarToggle<CR>
+
+" ## ctrl + s for clean search ##
+map <C-s> :noh<CR>
 
 " ## nerdtree ##
-map <C-n> :NERDTreeToggle<CR>
+map <C-t> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
+" Automatically close NERDTree when you open a file
+let NERDTreeQuitOnOpen=1
+
+" new buffer
+nnoremap <C-b> :CtrlPBuffer<CR>
+
+" buffer navagation
+noremap <C-l> gt
+noremap <C-h> gT
 
 " ## move lines  - ctrl + j/k to up and down lines ##
 nnoremap <C-j> :m .+1<CR>==
@@ -139,14 +140,3 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 imap { {}<Left>
 imap ( ()<Left>
 imap [ []<Left>
-
-" Find files using Telescope command-line sugar. (leader key : backslash \)
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-
-
-" Based of
-" VimConfig.com
-" https://cooperati.com.br/2012/02/melhorando-o-editor-vim/

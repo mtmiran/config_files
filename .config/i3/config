@@ -257,5 +257,5 @@ exec_always feh --bg-fill /home/mateus/Imagens/wallpaper/nuvem.jpg
 exec --no-startup-id xfce4-clipman &
 
 ## i3lock ##
-bindsym Mod4+l exec i3lock --color=#4e616c
+bindsym $mod+F11 exec i3lock --color=#4e616c
 
