@@ -7,53 +7,14 @@
 "#
 "#########################
 
-" ## GENERAL ##
-set title		" Set title of document
-set mouse=a		" enable mouse
-syntax on		" enable syntax
-set scrolloff=8		" Minimum number of lines to keep above and below the cursor
-set number		" Show line numbers
-set relativenumber	" Show line relative numbers
-set linebreak		" Break lines at word (requires Wrap lines)
-set textwidth=79	" Line wrap (number of cols)
-set showmatch		" Highlight matching brace {} [] ()
-set list lcs=trail:·,tab:»·
-
-" ## search ##
-set hlsearch		" Highlight all search results
-set smartcase		" Enable smart-case search
-set ignorecase		" Always case-insensitive
-set incsearch		" Searches for strings incrementally
-
-" ## indent ##
-set autoindent		" Auto-indent new lines
-set shiftwidth=4	" Number of auto-indent spaces
-set smartindent		" Enable smart-indent
-set smarttab		" Enable smart-tabs
-set softtabstop=4	" Number of spaces per Tab
-
-" ## editor behavior ##
-set undolevels=1000	" Number of undo levels
-set backspace=indent,eol,start	" Backspace behaviour
-set noswapfile		" No backup swapfile
-set nobackup		" No backup files
-set nowritebackup	" No backuo files
-set clipboard=unnamedplus
-set encoding=utf-8	" The conding should be utf-8 to activate the fonr icons
-set splitright		" Create the vertical split to the right
-set splitbelow		" Create the horizontal splits blelow
-set cmdheight=2		" Give more space for displaying messages
-set autoread		" Update nvim after file update from outside
-filetype on		" Detect and set the filetype option and trigger the FileType Event
-filetype plugin on	" Load the plugin file for the file type, if any
-filetype indent on	" Load the indent file for the file type, if any
-
-
 " #### PLUGINS ####
 "" Plugs - :source % ; :PlugInstal ; remover: :PlugClean
 call plug#begin()
-Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
-Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
+
+" For Commenting gcc & gc
+Plug 'https://github.com/tpope/vim-commentary'
+" Tagbar for code navigation
+Plug 'https://github.com/preservim/tagbar'
 
 " NerdTree
 Plug 'preservim/nerdtree'
@@ -63,6 +24,10 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+" Syntax
+Plug 'vim-syntastic/syntastic'
+Plug 'nvie/vim-flake8'
 
 " Auto Completion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -76,6 +41,44 @@ Plug 'rafi/awesome-vim-colorschemes' " Retro Scheme
 Plug 'rafamadriz/themes.nvim'
 
 call plug#end()
+
+
+" ## BASIC ##
+set title
+set mouse=a
+syntax on
+set scrolloff=8
+set number
+set relativenumber
+set linebreak
+set showmatch
+set list lcs=trail:·
+
+" ## search ##
+set hlsearch
+set smartcase
+set ignorecase
+set incsearch
+
+" ## editor behavior ##
+set undolevels=1000
+set backspace=indent,eol,start
+set noswapfile
+set nobackup
+set nowritebackup
+set clipboard=unnamedplus
+set encoding=utf-8
+set autoread
+filetype on
+filetype plugin on
+filetype indent on
+" ## indent ##
+set autoindent
+set smartindent
+set smarttab
+set expandtab
+" for python pep8 (ts=tabstop; sts=softtabstop; sw=shiftwidth)
+autocmd Filetype python setlocal ts=4 sts=4 sw=4
 
 
 " PLUGIN CONFIGURATION
@@ -100,9 +103,9 @@ autocmd BufWritePre * :%s/\s\+$//e
 map  :%s/\r//g
 
 " #### SpellChcek ####
-"set spell spelllang=pt	" Enable
+"set spell spelllang=pt " Enable
 "set spelllang=en
-set nospell		" Desable
+set nospell " Desable
 
 " #### KEY MAPS ####
 

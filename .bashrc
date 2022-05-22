@@ -40,7 +40,7 @@ export BROWSER="firefox"
 export TERMINAL="xterm"
 export MANPAGER="less"
 export PAGER="less"
-
+export TERM="xterm-256color"
 
 ### OPTIONS ###
 #set -o vi
@@ -53,7 +53,7 @@ alias mv='mv -i'
 alias rm='rm -i'
 alias top='htop'
 alias vi='nvim'
-alias github='cd /home/mateus/Documentos/ProjetosGit'
+alias github='cd /home/mateus/Documentos/Projetos/Github'
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
