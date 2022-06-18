@@ -16,6 +16,9 @@ Plug 'https://github.com/tpope/vim-commentary'
 " Tagbar for code navigation
 Plug 'https://github.com/preservim/tagbar'
 
+" Paste Image
+Plug 'ekickx/clipboard-image.nvim'
+
 " NerdTree
 Plug 'preservim/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -72,6 +75,10 @@ set autoread
 filetype on
 filetype plugin on
 filetype indent on
+
+"
+autocmd Filetype python set cursorcolumn
+
 " ## indent ##
 set autoindent
 set smartindent
@@ -125,11 +132,11 @@ let NERDTreeShowHidden=1
 let NERDTreeQuitOnOpen=1
 
 " new buffer
-nnoremap <C-b> :CtrlPBuffer<CR>
+nnoremap <C-b> :tabnew<CR>
 
 " buffer navagation
-noremap <C-l> gt
-noremap <C-h> gT
+"noremap <C-l> gt
+"noremap <C-h> gT
 
 " ## move lines  - ctrl + j/k to up and down lines ##
 nnoremap <C-j> :m .+1<CR>==
@@ -143,3 +150,6 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 imap { {}<Left>
 imap ( ()<Left>
 imap [ []<Left>
+
+" PasteImage
+nnoremap <C-i> :PasteImg<CR>

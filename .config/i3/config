@@ -234,7 +234,7 @@ bindsym $mod+a exec "brave-browser --incognito"
 ## monitor ##
 
 # monitor setup
-exec_always xrandr --output HDMI-1 --auto --left-of eDP-1
+exec_always xrandr --output eDP-1 --auto --left-of HDMI-1
 
 
 # Moving workspaces between screens
