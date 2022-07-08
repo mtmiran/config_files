@@ -55,6 +55,11 @@ alias top='htop'
 alias vi='nvim'
 alias github='cd /home/mateus/Documentos/Projetos/Github'
 
+# start tmux
+if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+    tmux attach -t default || tmux new -s default
+fi
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/mateus/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
@@ -69,4 +74,5 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+conda config --set auto_activate_base false
 
