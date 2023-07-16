@@ -1,6 +1,6 @@
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "help", "python", "c", "lua", "rust" },
+  ensure_installed = { "python", "c", "lua", "rust", "bash", "bibtex", "latex", "markdown" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -19,4 +19,17 @@ require'nvim-treesitter.configs'.setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
+
+  -- this part is only for if you installed nvim-ts-rainbow
+    rainbow = {
+        enable = true,
+        extended_mode = true, -- adds rainbows for stuff like html tags
+        max_file_lines = 2500 
+        -- you can set this if you ever load big jsons into nvim 
+        -- and just don't want to deal with it
+        -- I've never written such a big code file before, 
+        -- but I've had colleagues send me big monolithic files before, 
+        -- otherwise I'd set this to something lower.
+    }
+
 }
