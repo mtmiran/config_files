@@ -45,7 +45,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec xterm
+bindsym $mod+Return exec xterm tmux
 
 # kill focused window
 bindsym $mod+q kill
@@ -86,10 +86,10 @@ bindsym $mod+Shift+l move right
 # bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-# bindsym $Mod1+h split h
+bindsym $mod+Mod1+o split h
 
 # split in vertical orientation
-# bindsym $mod+v split v
+bindsym $mod+o split v
 
 # enter fullscreen mode for the focused container
 bindsym F11 fullscreen toggle
@@ -111,14 +111,13 @@ bindsym $mod+Shift+space floating toggle
 # focus the child container
 #bindsym $mod+d focus child
 
-### multiple monitors ###
-## single monitor
-# set $firstmonitor eDP-1
-# set $secondtmonitor eDP-1
 
 ## dual monitor
 set $firstmonitor eDP-1
 set $secondmonitor HDMI-1
+
+# set $firstmonitor HDMI-1
+# set $secondmonitor eDP-1
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -138,7 +137,7 @@ workspace 2 output $firstmonitor
 workspace 3 output $firstmonitor
 workspace 4 output $firstmonitor
 workspace 5 output $firstmonitor
-workspace 6 output $secondmonitor
+workspace 6 output $firstmonitor
 workspace 7 output $secondmonitor
 workspace 8 output $secondmonitor
 workspace 9 output $secondmonitor
@@ -202,7 +201,8 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-## window color ##
+
+# window color ----------------------------------------------------------------
 
 # variables
 set $bgcolor	#4e616c
@@ -218,6 +218,8 @@ client.urgent           $ubgcolor	$ubgcolor	$textcolor	$ubgcolor
 
 client.background       #ffffff
 
+
+# i3bar -----------------------------------------------------------------------
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
@@ -233,14 +235,15 @@ bar {
     	}
 }
 
-#### Personal keybindings ####
+
+# Personal keybindings -------------------------------------------------------- 
 
 # Create Log out, Reboot, Poweroff bindings
 mode "(S)uspend, (L)ogout, (R)eboot, (P)oweroff" {
-        bindsym r exec --no-startup-id systemctl reboot
-        bindsym s exec --no-startup-id systemctl suspend; mode "default"
+        bindsym r exec --no-startup-id  systemctl reboot -i
+        bindsym s exec --no-startup-id  systemctl suspend; mode "default"
         bindsym l exit
-        bindsym p exec --no-startup-id systemctl poweroff
+        bindsym p exec --no-startup-id  systemctl poweroff -i
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -249,18 +252,13 @@ mode "(S)uspend, (L)ogout, (R)eboot, (P)oweroff" {
 
 bindsym $mod+F12 mode "(S)uspend, (L)ogout, (R)eboot, (P)oweroff"
 
-## programms ##
-bindsym $mod+a exec "brave-browser --incognito"
-bindsym $mod+t exec "thunar"
 
-## monitor ##
-
-# monitor setup
-exec_always xrandr --output eDP-1 --auto --left-of HDMI-1
+# monitor setup ----------------------------------------------------------------
+exec_always xrandr --output HDMI-1 --auto --left-of eDP-1 
 
 mode "(S)single monitor, (D)dual monitor" {
         bindsym s xrandr --output eDP-1
-        bindsym d xrandr --output eDp-1 --auto --left-of HDMI-1
+        bindsym d xrandr --output HDMI-1 --auto --left-of eDp-1 
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
@@ -270,16 +268,32 @@ mode "(S)single monitor, (D)dual monitor" {
 bindsym $mod+p mode "(S)single monitor, (D)dual monitor"
 
 # monitor setup
-exec_always xrandr --output eDP-1 --auto --left-of HDMI-1
+
+
+# programms -------------------------------------------------------------------
+
+# browsers
+bindsym $mod+a exec "brave-browser --incognito"
+bindsym $mod+f exec "firefox-esr"
+
+# notes
+bindsym $mod+n exec "/mnt/Arquivos/Documentos/PROJETOS/Python/quick_note/quick_note.py" 
+
+# thunar
+bindsym $mod+t exec "thunar"
 
 # screenshooter
-bindsym --release Print exec xfce4-screenshooter -fs /home/$USER/Imagens/prints/`date +%Y-%m-%d_%H:%M:%S`.png
+bindsym --release Print exec xfce4-screenshooter -fs /mnt/Arquivos/Imagens/PRINTS/`date +%Y-%m-%d_%H:%M:%S`.png
 bindsym --release $mod+Shift+s exec xfce4-screenshooter -rc
 
-## i3lock ##
-bindsym $mod+F11 exec i3lock --color=#4e616c
+# i3lock
+# bindsym $mod+F11 exec i3lock --color=#4e616c
 
-## autostart programms ##
+# xfce4 lock
+bindsym $mod+F11 exec light-locker-command --lock
+
+
+# autostart programms ---------------------------------------------------------
 
 # wallpaper
 exec_always feh --bg-fill /home/$USER/.config/i3/nuvem.jpg
@@ -292,3 +306,7 @@ exec --no-startup-id xfce4-clipman &
 
 # autotiling
 exec --no-startup-id alternating_layouts.py
+
+# audio pavucontrol
+ exec --no-startup-id xfce4-pulseaudio-plugin
+

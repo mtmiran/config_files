@@ -5,11 +5,10 @@
 XTerm.termName: xterm-256color
 
 !  set exterm window size
-XTerm*VT100.geometry: 90x35
+XTerm*VT100.geometry: 80x25
 
 !  set font
-xterm*faceName: xft: Noto Sans Regular
-xterm*faceSize: 12
+xterm*faceName: Noto Sans Regular:size=10
 
 !  select text
 XTerm*highlightSelection: true
